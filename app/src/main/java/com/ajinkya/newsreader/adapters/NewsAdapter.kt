@@ -1,18 +1,19 @@
-package com.encureit.newsreader.adapters
+package com.ajinkya.newsreader.adapters
 
-import NewsModel
+import com.ajinkya.newsreader.models.NewsModel
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.encureit.newsreader.R
-import com.encureit.newsreader.listeners.AdapterItemClickListener
-import com.encureit.newsreader.viewHolder.NewsAdapterViewHolder
+import com.ajinkya.newsreader.R
+import com.ajinkya.newsreader.listeners.AdapterItemClickListener
+import com.ajinkya.newsreader.viewHolder.NewsAdapterViewHolder
 
 class NewsAdapter (private val context: Context,
-                   private val newsModel: NewsModel):
+                   private val newsModel: NewsModel
+):
         RecyclerView.Adapter<NewsAdapterViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             NewsAdapterViewHolder {

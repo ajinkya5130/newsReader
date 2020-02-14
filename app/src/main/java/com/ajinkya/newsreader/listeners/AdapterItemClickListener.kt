@@ -1,4 +1,4 @@
-package com.encureit.newsreader.listeners
+package com.ajinkya.newsreader.listeners
 
 import android.view.View
 

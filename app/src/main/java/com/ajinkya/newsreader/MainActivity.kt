@@ -1,15 +1,15 @@
-package com.encureit.newsreader
+package com.ajinkya.newsreader
 
-import NewsModel
+import com.ajinkya.newsreader.models.NewsModel
 import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.encureit.newsreader.Common.common
-import com.encureit.newsreader.adapters.NewsAdapter
-import com.encureit.newsreader.listeners.NewsService
+import com.ajinkya.newsreader.common.CommonCall
+import com.ajinkya.newsreader.adapters.NewsAdapter
+import com.ajinkya.newsreader.listeners.NewsService
 import com.google.gson.Gson
 import dmax.dialog.SpotsDialog
 import io.paperdb.Paper
@@ -20,37 +20,41 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var layoutManager: LinearLayoutManager
-    lateinit var newsService: NewsService
-    lateinit var adapter: NewsAdapter
-    lateinit var dialog: AlertDialog
-    var initVal: Int = 1;
+    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var newsService: NewsService
+    private lateinit var adapter: NewsAdapter
+    private lateinit var dialog: AlertDialog
+    private var initVal: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         Paper.init(this)
-        newsService = common.newsService
+        newsService = CommonCall.newsService
 
         swipeContainer.setOnRefreshListener {
 
-            if (initVal%3 == 0){
-                tv_news_type.setText("Technology")
-                loadNews(true,newsService.fetchLatestTechnology());
+            when {
+                initVal%3 == 0 -> {
+                    tv_news_type.text = getString(R.string.technology)
+                    loadNews(true,newsService.fetchLatestTechnology())
 
-            }else if (initVal%3 == 1){
-                tv_news_type.setText("Latest News")
-                loadNews(true,newsService.fetchLatestNewsAsync());
-
-
-            }else{
-                tv_news_type.setText("Entertainment")
-                loadNews(true,newsService.fetchLatestEntertainment());
+                }
+                initVal%3 == 1 -> {
+                    tv_news_type.text = getString(R.string.latest_news)
+                    loadNews(true,newsService.fetchLatestNewsAsync())
 
 
+                }
+                else -> {
+                    tv_news_type.text = getString(R.string.entertainment)
+                    loadNews(true,newsService.fetchLatestEntertainment())
+
+
+                }
             }
-            initVal++;
+            initVal++
         }
 
         rv_news.setHasFixedSize(true)
@@ -71,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 val cache = Paper.book().read<String>("cache")
                 if (cache!=null && !cache.isBlank() && cache!="null"){
-                    val newsModel = Gson().fromJson<NewsModel>(cache,NewsModel::class.java)
+                    val newsModel = Gson().fromJson<NewsModel>(cache, NewsModel::class.java)
                     adapter = NewsAdapter(this,newsModel)
                     adapter.notifyDataSetChanged()
                     rv_news.adapter = adapter

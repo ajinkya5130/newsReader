@@ -1,9 +1,8 @@
-package com.encureit.newsreader.listeners
+package com.ajinkya.newsreader.listeners
 
-import NewsModel
+import com.ajinkya.newsreader.models.NewsModel
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface NewsService {
 
@@ -18,6 +17,6 @@ interface NewsService {
 
    /* @get:GET("/v2/top-headlines?country=in&apiKey=beae63bb4dbd4283a81ba08067fb7d71")
 
-    val sources: Call<NewsModel>*/
+    val sources: Call<com.encureit.newsreader.models.NewsModel>*/
 
 }
