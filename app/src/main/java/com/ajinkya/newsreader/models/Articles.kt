@@ -1,3 +1,6 @@
+package com.ajinkya.newsreader.models
+
+import Source
 import com.google.gson.annotations.SerializedName
 
 /*

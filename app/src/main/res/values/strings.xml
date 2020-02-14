@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">News Reader</string>
+    <string name="technology">Technology</string>
+    <string name="latest_news">Latest News</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="image_description">imageDescription</string>
 </resources>

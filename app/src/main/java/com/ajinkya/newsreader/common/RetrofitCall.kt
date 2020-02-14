@@ -1,4 +1,4 @@
-package com.encureit.newsreader.Common
+package com.ajinkya.newsreader.common
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -10,7 +10,7 @@ object RetrofitCall {
     fun getClient(baseURL: String?):Retrofit{
         if (retrofitClient ==null){
             retrofitClient = Retrofit.Builder()
-                .baseUrl(baseURL)
+                .baseUrl(baseURL!!)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
